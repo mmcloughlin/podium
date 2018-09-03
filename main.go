@@ -2,12 +2,15 @@ package main
 
 import (
 	"flag"
+	"io/ioutil"
 	"log"
+	"os"
 	"path/filepath"
 )
 
 var (
 	images = flag.String("images", "", "directory to write slide images to")
+	output = flag.String("pdf", "slides.pdf", "output pdf filename")
 )
 
 func main() {
@@ -25,10 +28,23 @@ func main() {
 
 	log.Printf("extracted %d slide images", len(imgs))
 
-	if *images != "" {
-		format := filepath.Join(*images, "slide%03d.png")
-		if err := WriteSlideImagesPNG(imgs, format); err != nil {
+	dir := *images
+	if dir == "" {
+		dir, err = ioutil.TempDir("", "example")
+		if err != nil {
 			log.Fatal(err)
 		}
+		defer os.RemoveAll(dir)
+	}
+
+	format := filepath.Join(dir, "slide%03d.png")
+	filenames, err := WriteSlideImagesPNG(imgs, format)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = WriteImagesPDF(filenames, *output)
+	if err != nil {
+		log.Fatal(err)
 	}
 }

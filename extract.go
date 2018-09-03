@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"image"
 	"image/png"
-	"io/ioutil"
 	"log"
 	"time"
 
@@ -116,23 +115,4 @@ func Images(url string) ([]image.Image, error) {
 	}
 
 	return imgs, nil
-}
-
-// WriteSlideImagesPNG writes all images to the given directory in PNG format.
-func WriteSlideImagesPNG(imgs []image.Image, format string) error {
-	var buf bytes.Buffer
-	for i, img := range imgs {
-		buf.Reset()
-		if err := png.Encode(&buf, img); err != nil {
-			return err
-		}
-
-		filename := fmt.Sprintf(format, i+1)
-		if err := ioutil.WriteFile(filename, buf.Bytes(), 0660); err != nil {
-			return err
-		}
-
-		log.Printf("slide %d image written to %s", i+1, filename)
-	}
-	return nil
 }
