@@ -1,0 +1,8 @@
+language: go
+go:
+  - 1
+install:
+  - go get -v .
+  - go build
+script:
+  - ./podium https://talks.godoc.org/github.com/mmcloughlin/talks/bsp-demo-pearl/pearl.slide
