@@ -71,6 +71,7 @@ func Images(url string) ([]image.Image, error) {
 		Args: []string{
 			"headless",
 			"window-size=1100x700",
+			"disable-gpu",
 		},
 	})
 
