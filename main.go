@@ -44,7 +44,7 @@ func main() {
 
 	dir := *images
 	if dir == "" {
-		dir, err = ioutil.TempDir("", "example")
+		dir, err = ioutil.TempDir("", "podium")
 		if err != nil {
 			log.Fatal(err)
 		}
