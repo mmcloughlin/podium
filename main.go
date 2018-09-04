@@ -4,24 +4,38 @@ import (
 	"flag"
 	"io/ioutil"
 	"log"
+	"net/url"
 	"os"
+	"path"
 	"path/filepath"
+	"strings"
 )
+
+// NameFromURL extracts the presentation name from its URL.
+func NameFromURL(raw string) (string, error) {
+	u, err := url.Parse(raw)
+	if err != nil {
+		return "", err
+	}
+	b := path.Base(u.Path)
+	n := strings.TrimSuffix(b, path.Ext(b))
+	return n, nil
+}
 
 var (
 	images = flag.String("images", "", "directory to write slide images to")
-	output = flag.String("pdf", "slides.pdf", "output pdf filename")
+	output = flag.String("output", "", "output filename")
 )
 
 func main() {
 	flag.Parse()
-	url := flag.Arg(0)
+	slidesURL := flag.Arg(0)
 
-	if url == "" {
+	if slidesURL == "" {
 		log.Fatal("must provide presentation url")
 	}
 
-	imgs, err := Images(url)
+	imgs, err := Images(slidesURL)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -38,13 +52,24 @@ func main() {
 	}
 
 	format := filepath.Join(dir, "slide%03d.png")
-	filenames, err := WriteSlideImagesPNG(imgs, format)
+	imageFilenames, err := WriteSlideImagesPNG(imgs, format)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = WriteImagesPDF(filenames, *output)
+	outputFilename := *output
+	if outputFilename == "" {
+		name, err := NameFromURL(slidesURL)
+		if err != nil {
+			log.Fatal(err)
+		}
+		outputFilename = name + ".pdf"
+	}
+
+	err = WriteImagesPDF(imageFilenames, outputFilename)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	log.Printf("written output to %s", outputFilename)
 }
