@@ -10,6 +10,7 @@ import (
 
 	"github.com/oliamb/cutter"
 	"github.com/tebeka/selenium"
+	"github.com/tebeka/selenium/chrome"
 )
 
 // FindSlideBounds discovers the bounding rectangle of the slide within a
@@ -52,8 +53,16 @@ func Images(url string) ([]image.Image, error) {
 	}
 	defer service.Stop()
 
+	cap := selenium.Capabilities{}
+	cap.AddChrome(chrome.Capabilities{
+		Args: []string{
+			"headless",
+			"window-size=1100x700",
+		},
+	})
+
 	urlPrefix := fmt.Sprintf("http://localhost:%d/wd/hub", port)
-	wd, err := selenium.NewRemote(selenium.Capabilities{}, urlPrefix)
+	wd, err := selenium.NewRemote(cap, urlPrefix)
 	if err != nil {
 		return nil, err
 	}
