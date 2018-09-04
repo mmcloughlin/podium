@@ -57,6 +57,8 @@ func config(k, d string) string {
 func Images(url string) ([]image.Image, error) {
 	const port = 1337
 
+	selenium.SetDebug(true)
+
 	service, err := selenium.NewChromeDriverService(config("CHROME_DRIVER_PATH", "chromedriver"), port)
 	if err != nil {
 		return nil, err
