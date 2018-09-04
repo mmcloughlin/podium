@@ -15,10 +15,11 @@ import (
 // generate filenames (passed fmt.Sprintf). Returns list of image filenames.
 func WriteSlideImagesPNG(imgs []image.Image, format string) ([]string, error) {
 	var buf bytes.Buffer
+	enc := &png.Encoder{CompressionLevel: png.BestCompression}
 	filenames := make([]string, len(imgs))
 	for i, img := range imgs {
 		buf.Reset()
-		if err := png.Encode(&buf, img); err != nil {
+		if err := enc.Encode(&buf, img); err != nil {
 			return nil, err
 		}
 
