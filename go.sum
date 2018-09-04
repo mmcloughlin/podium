@@ -1,0 +1,10 @@
+github.com/blang/semver v3.5.1+incompatible h1:cQNTCjp13qL8KC3Nbxr/y2Bqb63oX6wdnnjpJbkM4JQ=
+github.com/blang/semver v3.5.1+incompatible/go.mod h1:kRBLl5iJ+tD4TcOOxsy/0fnwebNt5EWlYSAyrTnjyyk=
+github.com/jung-kurt/gofpdf v1.0.0 h1:EroSdlP9BOoL5ssLYf3uLJXhCQMMM2fFxCJDKA3RhnA=
+github.com/jung-kurt/gofpdf v1.0.0/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
+github.com/oliamb/cutter v0.2.2 h1:Lfwkya0HHNU1YLnGv2hTkzHfasrSMkgv4Dn+5rmlk3k=
+github.com/oliamb/cutter v0.2.2/go.mod h1:4BenG2/4GuRBDbVm/OPahDVqbrOemzpPiG5mi1iryBU=
+github.com/tebeka/selenium v0.9.3 h1:VhduicmEfSggPSsMAxKXKVQxunJWzSqT86RrQTcvT/I=
+github.com/tebeka/selenium v0.9.3/go.mod h1:eIMjt8y9rypiIrlx7TAlwwjiL8pr0uqZYQHUxhA2NNE=
+github.com/tebeka/selenium v0.9.4-0.20180503171259-a49cf4b98a36 h1:Fb7qZYhxbwuWpREV0gIG/lhzTwQj2M1xn9WIEa8vJ+A=
+github.com/tebeka/selenium v0.9.4-0.20180503171259-a49cf4b98a36/go.mod h1:eIMjt8y9rypiIrlx7TAlwwjiL8pr0uqZYQHUxhA2NNE=
