@@ -72,6 +72,7 @@ func Images(url string) ([]image.Image, error) {
 			"headless",
 			"window-size=1100x700",
 			"disable-gpu",
+			"no-sandbox",
 		},
 	})
 
