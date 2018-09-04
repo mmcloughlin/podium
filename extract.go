@@ -80,6 +80,7 @@ func Images(url string) ([]image.Image, error) {
 		s.style.borderRadius = 0;
 		s.style.border = 'none';
 	})
+	document.querySelector('#help').style.display = 'none';
 	`
 	_, err = wd.ExecuteScript(script, nil)
 	if err != nil {
