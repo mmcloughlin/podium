@@ -4,9 +4,12 @@ go:
 dist: trusty
 addons:
   chrome: stable
-before_install:
-  - sudo apt-get install -y chromium-chromedriver
+  apt:
+    packages:
+      - chromium-chromedriver
 install:
+  - whereis google-chrome-stable
+  - whereis chromedriver
   - go get -v .
   - go build
 script:
