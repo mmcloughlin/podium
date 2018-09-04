@@ -6,6 +6,7 @@ import (
 	"image"
 	"image/png"
 	"log"
+	"os"
 	"time"
 
 	"github.com/oliamb/cutter"
@@ -43,11 +44,20 @@ func CropSlide(img image.Image) (image.Image, error) {
 	})
 }
 
+// config fetches a key from the environment, returning d if not found.
+func config(k, d string) string {
+	v := os.Getenv("PODIUM_" + k)
+	if v == "" {
+		return d
+	}
+	return v
+}
+
 // Images extracts slide images from a talk URL.
 func Images(url string) ([]image.Image, error) {
 	const port = 1337
 
-	service, err := selenium.NewChromeDriverService("chromedriver", port)
+	service, err := selenium.NewChromeDriverService(config("CHROME_DRIVER_PATH", "chromedriver"), port)
 	if err != nil {
 		return nil, err
 	}
@@ -55,6 +65,7 @@ func Images(url string) ([]image.Image, error) {
 
 	cap := selenium.Capabilities{}
 	cap.AddChrome(chrome.Capabilities{
+		Path: config("CHROME_PATH", ""),
 		Args: []string{
 			"headless",
 			"window-size=1100x700",

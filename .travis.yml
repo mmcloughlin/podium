@@ -11,6 +11,7 @@ install:
   - go get -v .
   - go build
 before_script:
-  - export PATH="/usr/lib/chromium-browser:${PATH}"
+  - export PODIUM_CHROME_PATH="/usr/bin/google-chrome-stable"
+  - export PODIUM_CHROME_DRIVER_PATH="/usr/lib/chromium-browser/chromedriver"
 script:
   - ./podium https://talks.godoc.org/github.com/mmcloughlin/talks/bsp-demo-pearl/pearl.slide
