@@ -1,20 +1,23 @@
 language: go
 go:
-  - 1.11.x
+- 1.x
+- 1.9.x
+- 1.10.x
+- 1.11.x
 dist: trusty
 addons:
   chrome: stable
   apt:
     packages:
-      - chromium-chromedriver
+    - chromium-chromedriver
 env:
-  - GO111MODULE=on
+- GO111MODULE=on
 install:
-  - go get -v .
-  - go build
+- go get -v .
+- go build
 before_script:
-  - export PODIUM_CHROME_PATH="/usr/bin/google-chrome-stable"
-  - export PODIUM_CHROME_DRIVER_PATH="/usr/lib/chromium-browser/chromedriver"
+- export PODIUM_CHROME_PATH="/usr/bin/google-chrome-stable"
+- export PODIUM_CHROME_DRIVER_PATH="/usr/lib/chromium-browser/chromedriver"
 script:
-  - ./podium https://talks.golang.org/2014/names.slide
-  - test -f names.pdf
+- ./podium https://talks.golang.org/2014/names.slide
+- test -f names.pdf
