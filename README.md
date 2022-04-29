@@ -6,7 +6,7 @@ Goldbergian tool for converting Golang
 ## Install
 
 ```
-go get github.com/mmcloughlin/podium
+go install github.com/mmcloughlin/podium@latest
 ```
 
 Depends on [Chrome](https://www.google.com/chrome/) and
